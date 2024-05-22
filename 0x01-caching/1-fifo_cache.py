@@ -19,7 +19,7 @@ class FIFOCache(BaseCaching):
         to call the parent init: super().__init__()
         """
         super().__init__()
-        self.order = []
+        # self.order = []
 
     def put(self, key, item):
         """
@@ -30,13 +30,9 @@ class FIFOCache(BaseCaching):
         following by a new line
         """
         if key is not None or item is not None:
-            if key in self.cache_data:
-                self.order.remove(key)
             self.cache_data[key] = item
-            self.order.append(key)
-
             if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-                oldest_key = self.order.pop(0)
+                oldest_key = next(iter(self.cache_data))
                 del self.cache_data[oldest_key]
                 print(f"DISCARD: {oldest_key}")
 
