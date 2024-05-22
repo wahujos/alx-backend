@@ -29,7 +29,7 @@ class FIFOCache(BaseCaching):
         you must print DISCARD: with the key discarded and
         following by a new line
         """
-        if key is not None or item is not None:
+        if key is not None and item is not None:
             self.cache_data[key] = item
             if len(self.cache_data) > BaseCaching.MAX_ITEMS:
                 oldest_key = next(iter(self.cache_data))
